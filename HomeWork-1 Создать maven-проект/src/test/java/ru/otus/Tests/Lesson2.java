@@ -21,7 +21,6 @@ public class Lesson2 extends Presets {
     final private Logger logger = Logger.getLogger(Lesson2.class);
 
     @Test
-    @Parameters()
     public void homeWork1() {
             driver.get(cfg.systemUrl());
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.className(HOME_LOGO)));
