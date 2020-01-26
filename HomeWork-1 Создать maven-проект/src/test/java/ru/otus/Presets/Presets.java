@@ -25,7 +25,7 @@ public class Presets {
     public void setupTest() {
         driver = new ChromeDriver();
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Integer.parseInt(cfg.testsWaitingTime()));
+        wait = new WebDriverWait(driver, cfg.testsWaitingTime());
     }
 
     @AfterMethod

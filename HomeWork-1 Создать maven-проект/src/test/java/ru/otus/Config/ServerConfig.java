@@ -12,7 +12,7 @@ public interface ServerConfig extends Config {
 
     @Key("tests.waiting.time")
     @DefaultValue("10")
-    String testsWaitingTime();
+    int testsWaitingTime();
 
     @Key("db.host")
     @DefaultValue("http://localhost:8080")
