@@ -12,7 +12,7 @@ public class ResultSender {
     private static ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
 
     private static final InfluxDB INFLXUDB = InfluxDBFactory.connect(cfg.dbHost(), cfg.dbLogin(), cfg.dbPassword());
-    private static final String DATABASE = "selenium";
+    private static final String DATABASE = cfg.dbName();
 
     static{
         INFLXUDB.setDatabase(DATABASE);
