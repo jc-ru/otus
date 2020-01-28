@@ -66,12 +66,12 @@ public class Presets {
 
     private String getParameter() {
         String value = System.getProperty("browser");
-        if (value == null)
-            throw new RuntimeException("browser" + " is not a parameter!");
-
-        if (value.isEmpty())
-            throw new RuntimeException("browser" + " is empty!");
-
-        return value;
+        if (value == null) {
+            return "chrome";
+        } else if (value.isEmpty()) {
+            return "chrome";
+        } else {
+            return value;
+        }
     }
 }
