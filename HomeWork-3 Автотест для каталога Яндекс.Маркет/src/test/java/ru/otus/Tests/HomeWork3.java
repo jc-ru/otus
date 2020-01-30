@@ -115,19 +115,19 @@ public class HomeWork3 extends Presets {
             try {
                 driver.findElement(By.xpath(OS_PARAM_CHAR));
                 Assert.fail("Параметр 'Операционная система' отсутствует в разделе 'все характеристики'");
-            } catch (Exception e) {
-                logger.error(e);
+            } catch (Exception ignored) {
+                logger.info("Параметр 'Операционная система' присутствует в разделе 'все характеристики'");
             }
             //Открытие вкладки "различающиеся характеристики"
             driver.findElement(By.xpath(BTN_DIFF_CHAR)).click();
-            //ожидание исчезновения прелоадера
             wait.until(ExpectedConditions.invisibilityOfElementLocated(By.xpath(PRELOAD)));
             //проверка на отсутствие параметра "Операционная система"
             try {
                 driver.findElement(By.xpath(OS_PARAM_CHAR));
+                logger.info("Параметр 'Операционная система' отсутствует в разделе 'различающиеся характеристики'");
             } catch (Exception e) {
                 logger.error(e);
-                Assert.fail("Параметр 'Операционная система' присутствует в разделе 'все характеристики'");
+                Assert.fail("Параметр 'Операционная система' присутствует в разделе 'различающиеся характеристики'");
             }
         } catch (Exception e) {
             logger.error(e);
