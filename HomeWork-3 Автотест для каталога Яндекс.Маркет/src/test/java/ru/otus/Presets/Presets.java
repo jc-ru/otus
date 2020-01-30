@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
@@ -22,6 +23,7 @@ public class Presets {
     final private Logger logger = Logger.getLogger(Presets.class);
     protected WebDriver driver;
     protected WebDriverWait wait;
+
 
     @BeforeClass
     public void setupClass() {

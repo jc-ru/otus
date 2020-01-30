@@ -43,9 +43,9 @@ public class HomeWork3 extends Presets {
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(WRAP_MENU)));
 
             //Наводим на раздел "Электроника"
-            WebElement we2 = driver.findElement(By.xpath(BTN_MENU_ELECTRON));
-            Actions action2 = new Actions(driver);
-            action2.moveToElement(we2).build().perform();
+            WebElement menuHover = driver.findElement(By.xpath(BTN_MENU_ELECTRON));
+            Actions action = new Actions(driver);
+            action.moveToElement(menuHover).build().perform();
 
             //Кликаем в категорию "Мобильные телефоны"
             driver.findElement(By.xpath(BTN_HREF_MOB_TEL)).click();
