@@ -39,7 +39,6 @@ public class HomeWork2 extends Presets {
 
     @Test
     public void homeWork2_3() {
-        WebDriver driver = WebDriverPool.DEFAULT.getDriver(new FirefoxOptions());
         driver.get("https://google.ru");
     }
 

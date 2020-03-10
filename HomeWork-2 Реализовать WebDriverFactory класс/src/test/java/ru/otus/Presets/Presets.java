@@ -36,21 +36,24 @@ public class Presets {
         String browserName = browserParameter.toLowerCase();
         logger.info("Start browser: " + browserName);
 
-        if(browserName.equals("chrome")) {
-            driver = WebDriverPool.DEFAULT.getDriver(new ChromeOptions());
-        } else if(browserName.equals("firefox")) {
-            driver = WebDriverPool.DEFAULT.getDriver(new FirefoxOptions());
-        } else if(browserName.equals("ie")) {
-            driver = WebDriverPool.DEFAULT.getDriver(new InternetExplorerOptions());
-        } else if(browserName.equals("opera")) {
-            driver = WebDriverPool.DEFAULT.getDriver(new OperaOptions());
-        } else {
-            driver = WebDriverPool.DEFAULT.getDriver(new ChromeOptions());
+        switch (browserName) {
+            case "chrome":
+                driver = WebDriverPool.DEFAULT.getDriver(new ChromeOptions());
+                break;
+            case  "firefox":
+                driver = WebDriverPool.DEFAULT.getDriver(new FirefoxOptions());
+                break;
+            case "ie":
+                driver = WebDriverPool.DEFAULT.getDriver(new InternetExplorerOptions());
+                break;
+            case "opera":
+                driver = WebDriverPool.DEFAULT.getDriver(new OperaOptions());
+                break;
         }
 
 
         driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Integer.parseInt(cfg.testsWaitingTime()));
+        wait = new WebDriverWait(driver, cfg.testsWaitingTime());
     }
 
     @AfterMethod
