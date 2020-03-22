@@ -121,12 +121,12 @@ public class LkPersonalPage {
         WebElement selectElement = inputsMessengers.get(nmbrMessenger);
         selectElement.click();
 
-        List<WebElement> messengers = driver.findElements(By.xpath("//button[contains(@title, '" + nameMessenger + "')]"));
+        List<WebElement> messengers = driver.findElements(By.xpath("//button[@title='" + nameMessenger + "']"));
         WebElement selectMessenger = messengers.get(nmbrMessenger);
         selectMessenger.click();
 
-        driver.findElement(By.xpath("//input[contains(@id, 'id_contact-" + nmbrMessenger + "-value')]")).clear();
-        driver.findElement(By.xpath("//input[contains(@id, 'id_contact-" + nmbrMessenger + "-value')]")).sendKeys(linkMessenger);
+        driver.findElement(By.xpath("//input[@id='id_contact-" + nmbrMessenger + "-value']")).clear();
+        driver.findElement(By.xpath("//input[@id='id_contact-" + nmbrMessenger + "-value']")).sendKeys(linkMessenger);
 
         PageFactory.initElements(driver, this);
         return this;
@@ -151,7 +151,7 @@ public class LkPersonalPage {
 
     // Проверка на сохранение мессенджера
     public LkPersonalPage assertMessenger(Integer nmbrMessenger, String linkMessenger) {
-        String inputValue = driver.findElement(By.xpath("//input[contains(@id, 'id_contact-" + nmbrMessenger + "-value')]")).getAttribute("value");
+        String inputValue = driver.findElement(By.xpath("//input[@id='id_contact-" + nmbrMessenger + "-value']")).getAttribute("value");
         try {
             Assert.assertEquals(inputValue, linkMessenger);
         } catch (AssertionError ex) {
