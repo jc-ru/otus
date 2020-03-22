@@ -9,65 +9,54 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.opera.OperaOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
 import ru.otus.config.ServerConfig;
 import ru.stqa.selenium.factory.WebDriverPool;
 
 import java.util.concurrent.TimeUnit;
 
-
-public class Utils {
-
-    private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
-    final private Logger logger = Logger.getLogger(Utils.class);
+public class DriversManager {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
+    private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
+    final private Logger logger = Logger.getLogger(DriversManager.class);
 
-    @BeforeClass
-    public void setupClass() {
-        logger.info("Driver initialization");
-        WebDriverManager.chromedriver().setup();
-        WebDriverManager.firefoxdriver().setup();
-        WebDriverManager.iedriver().setup();
-        WebDriverManager.operadriver().setup();
-    }
-
-    @BeforeMethod
-    public void setupTest() {
+    public void getDriver() {
         String browserParameter = getParameter();
         String browserName = browserParameter.toLowerCase();
         logger.info("Start browser: " + browserName);
 
         switch (browserName) {
             case "chrome":
+                WebDriverManager.chromedriver().setup();
                 driver = WebDriverPool.DEFAULT.getDriver(new ChromeOptions());
                 break;
             case  "firefox":
+                WebDriverManager.firefoxdriver().setup();
                 driver = WebDriverPool.DEFAULT.getDriver(new FirefoxOptions());
                 break;
             case "ie":
+                WebDriverManager.iedriver().setup();
                 driver = WebDriverPool.DEFAULT.getDriver(new InternetExplorerOptions());
                 break;
             case "opera":
+                WebDriverManager.operadriver().setup();
                 driver = WebDriverPool.DEFAULT.getDriver(new OperaOptions());
                 break;
         }
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(cfg.testsImplicitlyWaitingTime(), TimeUnit.SECONDS);
+
+
+
+    }
+
+    public void getDriverWait() {
         wait = new WebDriverWait(driver, cfg.testsWaitingTime());
     }
 
-    @AfterMethod
-    public void teardown() {
-        if (driver !=null) {
-            driver.quit();
-        }
-    }
-
-    @AfterSuite
     public void stopAllDrivers() {
         WebDriverPool.DEFAULT.dismissAll();
     }
@@ -83,4 +72,5 @@ public class Utils {
             return value;
         }
     }
+
 }
