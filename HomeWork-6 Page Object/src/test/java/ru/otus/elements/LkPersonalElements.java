@@ -13,5 +13,7 @@ public class LkPersonalElements {
     public static final String INPUT_PHONE = "//input[contains(@name,'phone')]"; // инпут телефон пользователя (xpath)
     public static final String BTN_COMMUNICATION = "//div[contains(@class, 'lk-cv-block__input_md-4')]"; // кнопка "способ связи" (xpath)
     public static final String SUBMIT_PERSONAL_DATA = "//button[contains(@title, 'Сохранить и продолжить')]"; // кнопка "способ связи" (xpath)
+    public static final String ADD_BTN_CONTACT_MESSENGER = "//button[contains(text(), 'Добавить')]"; // кнопка "Добавить" (xpath)
+    public static final String NEW_INPUT_CONTACT_MESSENGER = "//input[contains(@id, 'id_contact-1-value')]"; // новый добавленный инпут (xpath)
 
 }

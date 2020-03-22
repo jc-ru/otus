@@ -7,7 +7,7 @@ import ru.otus.config.ServerConfig;
 import ru.otus.pages.LkPersonalPage;
 import ru.otus.pages.LoginPage;
 import ru.otus.utils.Utils;
-import static ru.otus.elements.ConfigProperties.*;
+import static ru.otus.config.ConfigProperties.*;
 
 
 public class HomeWork6 extends Utils {

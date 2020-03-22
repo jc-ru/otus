@@ -1,4 +1,4 @@
-package ru.otus.elements;
+package ru.otus.config;
 
 public class UrlAndPath {
     public static final String URL_SYSTEM = "https://otus.ru";

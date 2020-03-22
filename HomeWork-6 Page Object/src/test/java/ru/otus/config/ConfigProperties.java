@@ -1,4 +1,4 @@
-package ru.otus.elements;
+package ru.otus.config;
 
 import org.aeonbits.owner.ConfigFactory;
 import ru.otus.config.ServerConfig;

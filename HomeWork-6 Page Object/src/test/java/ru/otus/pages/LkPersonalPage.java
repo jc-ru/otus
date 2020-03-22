@@ -4,17 +4,17 @@ import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import ru.otus.tests.HomeWork6;
 
-import java.util.AbstractCollection;
 import java.util.List;
-import static ru.otus.elements.ConfigProperties.*;
+import static ru.otus.config.ConfigProperties.*;
 import static ru.otus.elements.LkPersonalElements.*;
-import static ru.otus.elements.UrlAndPath.*;
+import static ru.otus.config.UrlAndPath.*;
 
 public class LkPersonalPage {
     final private Logger logger = Logger.getLogger(HomeWork6.class);
@@ -23,6 +23,37 @@ public class LkPersonalPage {
 
     String emailVal;
     String phoneVal;
+
+    @FindBy (xpath = INPUT_FIRST_NAME)
+    private WebElement inputFirstName;
+
+    @FindBy (xpath = INPUT_EU_FIRST_NAME)
+    private WebElement inputEuFirstName;
+
+    @FindBy (xpath = INPUT_LAST_NAME)
+    private WebElement inputLastName;
+
+    @FindBy (xpath = INPUT_EU_LAST_NAME)
+    private WebElement inputEuLastName;
+
+    @FindBy (xpath = INPUT_BLOG_NAME)
+    private WebElement inputBlogName;
+
+    @FindBy (xpath = INPUT_DATE_BIRTH)
+    private WebElement inputDateBirth;
+
+    @FindBy (xpath = INPUT_EMAIL)
+    private WebElement inputEmail;
+
+    @FindBy (xpath = INPUT_PHONE)
+    private WebElement inputPhone;
+
+    @FindBy (xpath = BTN_COMMUNICATION)
+    private List<WebElement> btnCommunication;
+
+    @FindBy (xpath = ADD_BTN_CONTACT_MESSENGER)
+    private WebElement addBtnContactMessenger;
+
 
     public LkPersonalPage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;
@@ -40,18 +71,18 @@ public class LkPersonalPage {
 
     // Изменения ФИО и ДР пользователя
     public LkPersonalPage editFullName() {
-        driver.findElement(By.xpath(INPUT_FIRST_NAME)).clear();
-        driver.findElement(By.xpath(INPUT_FIRST_NAME)).sendKeys(FIRST_NAME);
-        driver.findElement(By.xpath(INPUT_EU_FIRST_NAME)).clear();
-        driver.findElement(By.xpath(INPUT_EU_FIRST_NAME)).sendKeys(EU_FIRST_NAME);
-        driver.findElement(By.xpath(INPUT_LAST_NAME)).clear();
-        driver.findElement(By.xpath(INPUT_LAST_NAME)).sendKeys(LAST_NAME);
-        driver.findElement(By.xpath(INPUT_EU_LAST_NAME)).clear();
-        driver.findElement(By.xpath(INPUT_EU_LAST_NAME)).sendKeys(EU_LAST_NAME);
-        driver.findElement(By.xpath(INPUT_BLOG_NAME)).clear();
-        driver.findElement(By.xpath(INPUT_BLOG_NAME)).sendKeys(BLOG_NAME);
-        driver.findElement(By.xpath(INPUT_DATE_BIRTH)).clear();
-        driver.findElement(By.xpath(INPUT_DATE_BIRTH)).sendKeys(DATE_BIRTH);
+        inputFirstName.clear();
+        inputFirstName.sendKeys(FIRST_NAME);
+        inputEuFirstName.clear();
+        inputEuFirstName.sendKeys(EU_FIRST_NAME);
+        inputLastName.clear();
+        inputLastName.sendKeys(LAST_NAME);
+        inputEuLastName.clear();
+        inputEuLastName.sendKeys(EU_LAST_NAME);
+        inputBlogName.clear();
+        inputBlogName.sendKeys(BLOG_NAME);
+        inputDateBirth.clear();
+        inputDateBirth.sendKeys(DATE_BIRTH);
 
         PageFactory.initElements(driver, this);
         return this;
@@ -60,10 +91,10 @@ public class LkPersonalPage {
 
     // Изменения Email пользователя
     public LkPersonalPage setEmail() {
-        emailVal = driver.findElement(By.xpath(INPUT_EMAIL)).getAttribute("value");
+        emailVal = inputEmail.getAttribute("value");
         try {
-            driver.findElement(By.xpath(INPUT_EMAIL)).clear();
-            driver.findElement(By.xpath(INPUT_EMAIL)).sendKeys(EMAIL);
+            inputEmail.clear();
+            inputEmail.sendKeys(EMAIL);
         } catch (Exception ex) {
             logger.info("Поле email содержит данные " + emailVal + " и оно не кликабельно");
         }
@@ -73,10 +104,10 @@ public class LkPersonalPage {
 
     // Изменения телефона пользователя
     public LkPersonalPage setPhone() {
-        phoneVal = driver.findElement(By.xpath(INPUT_PHONE)).getAttribute("value");
+        phoneVal = inputPhone.getAttribute("value");
         try {
-            driver.findElement(By.xpath(INPUT_PHONE)).clear();
-            driver.findElement(By.xpath(INPUT_PHONE)).sendKeys(PHONE);
+            inputPhone.clear();
+            inputPhone.sendKeys(PHONE);
         } catch (Exception ex) {
             logger.info("Поле телефон содержит данные " + phoneVal + " и оно не кликабельно");
         }
@@ -86,7 +117,7 @@ public class LkPersonalPage {
 
     // Добавления нового контакта (мессенджера)
     public LkPersonalPage addMessenger(Integer nmbrMessenger, String nameMessenger, String linkMessenger) {
-        List<WebElement> inputsMessengers = driver.findElements(By.xpath(BTN_COMMUNICATION));
+        List<WebElement> inputsMessengers = btnCommunication;
         WebElement selectElement = inputsMessengers.get(nmbrMessenger);
         selectElement.click();
 
@@ -103,8 +134,8 @@ public class LkPersonalPage {
 
     // Добавление нового поля для добавления нового контакта (мессенджера)
     public LkPersonalPage addBtnContactMessenger() {
-        driver.findElement(By.xpath("//button[contains(text(), 'Добавить')]")).click();
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[contains(@id, 'id_contact-1-value')]")));
+        addBtnContactMessenger.click();
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(NEW_INPUT_CONTACT_MESSENGER)));
 
         PageFactory.initElements(driver, this);
         return this;
