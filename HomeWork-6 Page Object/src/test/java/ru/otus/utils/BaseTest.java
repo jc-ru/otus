@@ -1,46 +1,37 @@
 package ru.otus.utils;
 
-import org.aeonbits.owner.ConfigFactory;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.*;
-import ru.otus.config.ServerConfig;
+import ru.otus.pages.LoginPage;
 
 
 public class BaseTest {
 
-    private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
-    final private Logger logger = Logger.getLogger(BaseTest.class);
-
-    DriversManager driversManager;
-
+    final public static Logger logger = Logger.getLogger(BaseTest.class);
+    public WebDriver driver = DriversManager.getDriver();
+    public WebDriverWait wait = DriversManager.getDriverWait();
+    public LoginPage loginPage;
 
     @BeforeClass
     public void setupClass() {
+        loginPage = new LoginPage(driver, wait);
     }
 
     @BeforeMethod
     public void setupTest() {
+        logger.info("Start test");
     }
 
     @AfterMethod
     public void tearDown() {
-
+        logger.info("Finish test");
     }
 
     @AfterSuite
     public void tearDownSuite() {
-        driversManager.stopAllDrivers();
+        DriversManager.stopAllDrivers();
     }
 
-
-//    private String getParameter() {
-//        String value = System.getProperty("browser");
-//        if (value == null) {
-//            return "chrome";
-//        } else if (value.isEmpty()) {
-//            return "chrome";
-//        } else {
-//            return value;
-//        }
-//    }
 }

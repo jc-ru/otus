@@ -6,9 +6,9 @@ public class Elements {
     public static final String PRELOAD = "//div[contains(@class, 'preloadable__preloader_visibility_visible')]"; // прелоадер (xpath)
 
     //Главная
-    public static final String BTN_MENU = "//button[contains(@id, '27903768-tab')]"; // Кнопка "Меню" (xpath)
+    public static final String BTN_MENU = "//button[contains(@id, '27903767-tab')]"; // Кнопка "Меню" (xpath)
     public static final String WRAP_MENU = "//div[contains(@class, '_3XkkZLVQDG')]"; // wrapper меню (xpath)
-    public static final String BTN_MENU_ELECTRON = "//button[contains(@id, '39889744-tab')]/a/span[contains(text(), 'Электроника')]"; // Кнопка "Электроника в раскрывающемся меню (xpath)
+    public static final String BTN_MENU_ELECTRON = "//button[contains(@id, '39889743-tab')]/a/span[contains(text(), 'Электроника')]"; // Кнопка "Электроника в раскрывающемся меню (xpath)
     public static final String BTN_HREF_MOB_TEL = "//a[contains(text(), 'Мобильные телефоны')]"; // ссылка с текстом "Мобильные телефоны (xpath)
 
     //Раздел "Мобильные телефоны"

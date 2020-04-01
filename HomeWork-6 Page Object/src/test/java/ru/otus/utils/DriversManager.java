@@ -15,22 +15,19 @@ import ru.stqa.selenium.factory.WebDriverPool;
 import java.util.concurrent.TimeUnit;
 
 public class DriversManager {
-    protected WebDriver driver;
-    protected WebDriverWait wait;
 
-    private ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
-    final private Logger logger = Logger.getLogger(DriversManager.class);
+    public static ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
+    final public static Logger logger = Logger.getLogger(DriversManager.class);
+    public static WebDriver driver;
 
-    public void getDriver() {
+    public static WebDriver getDriver() {
+
+
         String browserParameter = getParameter();
         String browserName = browserParameter.toLowerCase();
         logger.info("Start browser: " + browserName);
 
         switch (browserName) {
-            case "chrome":
-                WebDriverManager.chromedriver().setup();
-                driver = WebDriverPool.DEFAULT.getDriver(new ChromeOptions());
-                break;
             case  "firefox":
                 WebDriverManager.firefoxdriver().setup();
                 driver = WebDriverPool.DEFAULT.getDriver(new FirefoxOptions());
@@ -43,26 +40,35 @@ public class DriversManager {
                 WebDriverManager.operadriver().setup();
                 driver = WebDriverPool.DEFAULT.getDriver(new OperaOptions());
                 break;
+            default:
+                WebDriverManager.chromedriver().setup();
+                driver = WebDriverPool.DEFAULT.getDriver(new ChromeOptions());
+                break;
         }
 
         driver.manage().window().maximize();
-        driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS);
-        driver.manage().timeouts().implicitlyWait(cfg.testsImplicitlyWaitingTime(), TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(10,TimeUnit.SECONDS)
+                .implicitlyWait(cfg.testsImplicitlyWaitingTime(), TimeUnit.SECONDS);
 
-
+        return driver;
 
     }
 
-    public void getDriverWait() {
-        wait = new WebDriverWait(driver, cfg.testsWaitingTime());
+
+    public static WebDriverWait getDriverWait() {
+        return new WebDriverWait(getDriver(), cfg.testsWaitingTime());
     }
 
-    public void stopAllDrivers() {
+    public static void stopAllDrivers() {
         WebDriverPool.DEFAULT.dismissAll();
     }
 
+    public static void deleteCookie() {
+        driver.manage().deleteAllCookies();
+    }
 
-    private String getParameter() {
+
+    public static String getParameter() {
         String value = System.getProperty("browser");
         if (value == null) {
             return "chrome";

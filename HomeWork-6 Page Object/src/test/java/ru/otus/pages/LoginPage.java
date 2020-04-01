@@ -8,7 +8,6 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static ru.otus.config.ConfigProperties.*;
-import static ru.otus.elements.LkPersonalElements.INPUT_FIRST_NAME;
 import static ru.otus.elements.LoginElements.*;
 
 public class LoginPage {

@@ -17,7 +17,7 @@ import static ru.otus.elements.LkPersonalElements.*;
 import static ru.otus.config.UrlAndPath.*;
 
 public class LkPersonalPage {
-    final private Logger logger = Logger.getLogger(HomeWork6.class);
+    final public static Logger logger = Logger.getLogger(LkPersonalPage.class);
     WebDriver driver;
     WebDriverWait wait;
 
