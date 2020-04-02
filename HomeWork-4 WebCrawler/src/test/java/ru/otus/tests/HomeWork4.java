@@ -10,22 +10,28 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.annotations.Test;
 import ru.otus.config.ServerConfig;
 import ru.otus.utils.BaseTest;
+import ru.otus.utils.CSVUtils;
 
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
 public class HomeWork4 extends BaseTest {
     ServerConfig cfg = ConfigFactory.create(ServerConfig.class);
-    final private Logger logger = Logger.getLogger(HomeWork4.class);
+    final public static Logger logger = Logger.getLogger(HomeWork4.class);
 
 
     @Test
-    public void getReviewsCars() {
+    public void getReviewsCars() throws IOException {
+        // Подготовка CSV файла
+        String[] titlesCsv = {"Название", "Отзыв", "Статус продажи", "Ссылка"};
+        writeCsv = CSVUtils.getCsvWriter(titlesCsv);
 
+        // Получение всех элементов авто
         driver.get(cfg.urlCrowlerCar());
-
         while (true) {
             ((JavascriptExecutor) driver).executeScript("window.scrollBy(0, 5000)");
             List<WebElement>  elementsCars = driver.findElements(By.cssSelector("a.u-link-area"));
@@ -79,9 +85,7 @@ public class HomeWork4 extends BaseTest {
             } catch (Exception ex) {
             }
 
-            //Запись данных в CSV
             writeCsv.writeNext(new String[]{title, review, statusSaled, urlsCars.get(counter)});
-
             logger.info("Checked auto  " + (counter+1) + " of " + elementsCars.size());
         }
         logger.info("Pages in which a review is left - " + counterNullReview);
