@@ -22,11 +22,7 @@ public class DriversManager {
 
     public static WebDriver getDriver() {
 
-
-        String browserParameter = getParameter();
-        String browserName = browserParameter.toLowerCase();
-        logger.info("Start browser: " + browserName);
-
+        String browserName = getParameter().toLowerCase();
         switch (browserName) {
             case  "firefox":
                 WebDriverManager.firefoxdriver().setup();
@@ -53,7 +49,6 @@ public class DriversManager {
         return driver;
 
     }
-
 
     public static WebDriverWait getDriverWait() {
         return new WebDriverWait(getDriver(), cfg.testsWaitingTime());

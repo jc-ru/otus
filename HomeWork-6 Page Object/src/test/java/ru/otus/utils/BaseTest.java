@@ -10,9 +10,15 @@ import ru.otus.pages.LoginPage;
 public class BaseTest {
 
     final public static Logger logger = Logger.getLogger(BaseTest.class);
-    public WebDriver driver = DriversManager.getDriver();
-    public WebDriverWait wait = DriversManager.getDriverWait();
+    public WebDriver driver;
+    public WebDriverWait wait;
     public LoginPage loginPage;
+
+    @BeforeSuite
+    public void setupSuite() {
+        driver = DriversManager.getDriver();
+        wait = DriversManager.getDriverWait();
+    }
 
     @BeforeClass
     public void setupClass() {
